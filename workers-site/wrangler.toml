@@ -1,0 +1,33 @@
+```toml
+name = "cloudflare-workers-project"
+type = "javascript"
+
+account_id = "" # Fill in with your Cloudflare account ID
+workers_dev = true
+
+[site]
+bucket = "./public"
+entry-point = "workers-site"
+
+[build]
+command = "npm install && npm run build"
+watch_dir = "src"
+
+[durable_objects]
+bindings = [
+  { name = "PIXEL", class_name = "Pixel" },
+  { name = "SESSION", class_name = "Session" }
+]
+
+[vars]
+PIXEL_ID = "pixelId"
+COLOR = "color"
+LAST_UPDATE = "lastUpdate"
+
+[env.production]
+name = "cloudflare-workers-project-production"
+account_id = "" # Fill in with your Cloudflare account ID
+workers_dev = false
+route = "" # Fill in with your production route
+zone_id = "" # Fill in with your zone ID
+```
